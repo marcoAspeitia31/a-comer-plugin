@@ -77,6 +77,7 @@ class A_Comer_Plugin {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
+		$this->define_custom_post_types_hooks();
 		$this->define_public_hooks();
 
 	}
@@ -115,6 +116,11 @@ class A_Comer_Plugin {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-a-comer-plugin-admin.php';
+
+		/**
+		 * The class responsible for defining all actions that occur with custom post types
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-a-comer-plugin-testimonials.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -156,6 +162,21 @@ class A_Comer_Plugin {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related with custom post types functionality
+	 * of the plugin
+	 * 
+	 * @since	1.0.0
+	 * @access private
+	 */
+	private function define_custom_post_types_hooks() {
+
+		$plugin_cpt_testimonials = new A_Comer_Plugin_Testimonials();
+
+		$this->loader->add_action( 'init', $plugin_cpt_testimonials, 'testimonials_post_type', 0 );
 
 	}
 
