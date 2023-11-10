@@ -6,7 +6,7 @@
  * @since      1.0.0
  *
  * @package    A_Comer_Plugin
- * @subpackage A_Comer_Plugin/admin
+ * @subpackage A_Comer_Plugin/admin/custom-post-types
  */
 
 class A_Comer_Plugin_Testimonials {
@@ -70,10 +70,7 @@ class A_Comer_Plugin_Testimonials {
     public function testimonials_metabox() {
 
         $prefix = 'testimonials_';
-
-        /**
-         * Sample metabox to demonstrate each field type included
-         */
+        
         $testimonials_metabox = new_cmb2_box( array(
             'id'            => $prefix . 'metabox',
             'title'         => esc_html__( 'Testimonial fields', 'a-comer-plugin' ),

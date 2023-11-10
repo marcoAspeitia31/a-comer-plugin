@@ -77,6 +77,7 @@ class A_Comer_Plugin {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
+		$this->define_cmb2_metaboxes_hooks();
 		$this->define_custom_post_types_hooks();
 		$this->define_public_hooks();
 
@@ -113,19 +114,24 @@ class A_Comer_Plugin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-a-comer-plugin-i18n.php';
 
 		/**
+		 * The file responsible of give functionality with cmb2 framework
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-a-comer-plugin-admin.php';
 
 		/**
+		 * The classes responsibles for defining all the metaboxes for pages in the admin area.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/admin/custom-fields/class-a-comer-plugin-front-page-fields.php';
+
+		/**
 		 * The class responsible for defining all actions that occur with custom post types
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-a-comer-plugin-testimonials.php';
-
-		/**
-		 * The file responsible of custom metaboxes with cmb2 framework
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -167,6 +173,21 @@ class A_Comer_Plugin {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+	}
+
+	/**
+	 * Register all of the hooks related to cmb2 pages metaboxes in the admin area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_cmb2_metaboxes_hooks() {
+
+		$plugin_front_page_metaboxes = new A_Comer_Plugin_Front_Page_Fields();
+
+		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_banner_metabox' );
 
 	}
 
