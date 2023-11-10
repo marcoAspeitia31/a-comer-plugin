@@ -123,6 +123,11 @@ class A_Comer_Plugin {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-post-types/class-a-comer-plugin-testimonials.php';
 
 		/**
+		 * The file responsible of custom metaboxes with cmb2 framework
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
