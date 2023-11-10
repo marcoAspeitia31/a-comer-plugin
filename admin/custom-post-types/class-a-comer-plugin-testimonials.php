@@ -47,7 +47,7 @@ class A_Comer_Plugin_Testimonials {
             'label'                 => __( 'Testimonial', 'a-comer-plugin' ),
             'description'           => __( 'Testimonial Description', 'a-comer-plugin' ),
             'labels'                => $labels,
-            'supports'              => array( 'title', 'editor', 'thumbnail' ),
+            'supports'              => array( 'title' ),
             'hierarchical'          => false,
             'public'                => false,
             'show_ui'               => true,
@@ -64,6 +64,55 @@ class A_Comer_Plugin_Testimonials {
             'show_in_rest'          => true,
         );
         register_post_type( 'testimonials', $args );
+
+    }
+
+    public function testimonials_metabox() {
+
+        $prefix = 'testimonials_';
+
+        /**
+         * Sample metabox to demonstrate each field type included
+         */
+        $testimonials_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Testimonial fields', 'a-comer-plugin' ),
+            'object_types'  => array( 'testimonials' ), // Post type
+            'priority'   => 'high',
+            'show_names' => true, // Show field names on the left
+            'closed'     => false, // true to keep the metabox closed by default
+            'show_in_rest' => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
+        ) );
+
+        $testimonials_metabox->add_field( array(
+            'name' => esc_html__( 'Job position', 'a-comer-plugin' ),
+            'id'   => $prefix . 'job_position',
+            'type' => 'text_medium',
+        ) );
+
+        $testimonials_metabox->add_field( array(
+            'name' => esc_html__( 'Testimonial Opinion', 'a-comer-plugin' ),
+            'id'   => $prefix . 'opinion',
+            'type' => 'textarea_small',
+        ) );
+
+        $testimonials_metabox->add_field( array(
+            'name' => esc_html__( 'Testimonial picture', 'a-comer-plugin' ),
+            'id'   => $prefix . 'picture',
+            'type' => 'file',
+            'text' => array(
+                'add_upload_file_text' => esc_html__( 'Upload a testimonial picture', 'a-comer-plugin' )
+            ),
+            'query_args' => array(
+                'type' => array(
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'image/webp',
+                )
+            ),
+            'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
+        ) );
 
     }
 

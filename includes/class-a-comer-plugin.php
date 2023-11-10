@@ -182,6 +182,7 @@ class A_Comer_Plugin {
 		$plugin_cpt_testimonials = new A_Comer_Plugin_Testimonials();
 
 		$this->loader->add_action( 'init', $plugin_cpt_testimonials, 'testimonials_post_type', 0 );
+		$this->loader->add_action( 'cmb2_init', $plugin_cpt_testimonials, 'testimonials_metabox', 0 );
 
 	}
 
