@@ -139,4 +139,57 @@ class A_Comer_Plugin_Front_Page_Fields {
 
     }
 
+    function front_page_counter_metabox() {
+
+        $prefix = 'front_page_counter_';
+        $front_page_id = get_option( 'page_on_front' );
+
+        $front_page_counter_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Counters metabox', 'a-comer-plugin' ),
+            'object_types'  => array( 'page' ), // Post type
+            'context'    => 'normal',
+            'priority'   => 'high',
+            'show_names' => true, // Show field names on the left
+            'show_in_rest' => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
+            'show_on'      => array(
+                'id'    => array( $front_page_id ),
+            ),
+        ) );
+
+        $group_field_id = $front_page_counter_metabox->add_field( array(
+            'id'          => $prefix . 'counters',
+            'type'        => 'group',
+            'description' => esc_html__( 'Generates reusable form counters', 'a-comer-plugin' ),
+            'options'     => array(
+                'group_title'    => esc_html__( 'Counter {#}', 'a-comer-plugin' ), // {#} gets replaced by row number
+                'add_button'     => esc_html__( 'Add Another Counter', 'a-comer-plugin' ),
+                'remove_button'  => esc_html__( 'Remove Counter', 'a-comer-plugin' ),
+                'sortable'       => true,
+                // 'closed'      => true, // true to have the groups closed by default
+                'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'a-comer-plugin' ), // Performs confirmation before removing group.
+            ),
+        ) );
+
+        $front_page_counter_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Counter Title', 'cmb2' ),
+            'id'         => 'title',
+            'type'       => 'text',
+        ) );
+
+        $front_page_counter_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Number', 'cmb2' ),
+            'id'         => 'number',
+            'type'       => 'text',
+            'attributes' => array(
+                'type'      => 'number',
+                'pattern'   => '\d*',
+                'min' => '0',
+            ),
+            'sanitization_cb' => 'absint',
+            'escape_cb'       => 'absint',
+        ) );
+
+    }
+
 }
