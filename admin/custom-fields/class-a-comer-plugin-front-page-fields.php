@@ -207,7 +207,7 @@ class A_Comer_Plugin_Front_Page_Fields {
 
         $front_page_first_info_metabox = new_cmb2_box( array(
             'id'            => $prefix . 'metabox',
-            'title'         => esc_html__( 'Stand information 1 section', 'a-comer-plugin' ),
+            'title'         => esc_html__( 'Stand out information 1 section', 'a-comer-plugin' ),
             'object_types'  => array( 'page' ),
             'context'       => 'normal',
             'priority'      => 'high',
@@ -293,7 +293,7 @@ class A_Comer_Plugin_Front_Page_Fields {
 
         $front_page_second_info_metabox = new_cmb2_box( array(
             'id'            => $prefix . 'metabox',
-            'title'         => esc_html__( 'Stand information 2 section', 'a-comer-plugin' ),
+            'title'         => esc_html__( 'Stand out information 2 section', 'a-comer-plugin' ),
             'object_types'  => array( 'page' ),
             'context'       => 'normal',
             'priority'      => 'high',
@@ -371,6 +371,73 @@ class A_Comer_Plugin_Front_Page_Fields {
 		) );
 
 
+    }
+
+    function front_page_cta_metabox() {
+
+        $prefix = 'front_page_cta_';
+        $front_page_id = get_option( 'page_on_front' );
+
+        $front_page_cta_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Call to action section', 'a-comer-plugin' ),
+            'object_types'  => array( 'page' ),
+            'context'       => 'normal',
+            'priority'      => 'high',
+            'show_names'    => true,
+            'show_in_rest'  => WP_REST_Server::ALLMETHODS,
+            'show_on'       => array(
+                'id'    => array( $front_page_id ),
+            ),
+        ) );
+
+        $front_page_cta_metabox->add_field( array(
+            'name' => esc_html__( 'Title', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the title for call to action', 'a-comer-plugin' ),
+            'id'   => $prefix . 'title',
+            'type' => 'text'
+        ) );
+
+        $front_page_cta_metabox->add_field( array(
+            'name' => esc_html__( 'Content', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the title for call to action', 'a-comer-plugin' ),
+            'id'   => $prefix . 'content',
+            'type' => 'textarea_small'
+        ) );
+
+        $front_page_cta_metabox->add_field( array(
+            'name' => esc_html__( 'CTA picture', 'a-comer-plugin' ),
+            'id'   => $prefix . 'picture',
+            'desc'       => esc_html__( 'Add an image with 330 x 360 pixels', 'a-comer-plugin' ),
+            'type' => 'file',
+            'text' => array(
+                'add_upload_file_text' => esc_html__( 'Upload the cta picture', 'a-comer-plugin' )
+            ),
+            'query_args' => array(
+                'type' => array(
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'image/webp',
+                )
+            ),
+        ) );
+
+        $front_page_cta_metabox->add_field( array(
+            'name' => esc_html__( 'Appstore URL', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'URL Link to download the app', 'a-comer-plugin' ),
+            'id'   => $prefix . 'app_store_url',
+            'type' => 'text_url',
+            'protocols' => array('http', 'https'), // Array of allowed protocols
+        ) );
+
+        $front_page_cta_metabox->add_field( array(
+            'name' => esc_html__( 'Google Play URL', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'URL Link to download the app', 'a-comer-plugin' ),
+            'id'   => $prefix . 'google_play_url',
+            'type' => 'text_url',
+            'protocols' => array('http', 'https'), // Array of allowed protocols
+        ) );
     }
 
 }
