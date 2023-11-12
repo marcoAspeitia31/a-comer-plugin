@@ -27,10 +27,6 @@ class A_Comer_Plugin_Front_Page_Fields {
             'show_on'      => array(
                 'id'    => array( $front_page_id ),
             ),
-            // 'cmb_styles' => false, // false to disable the CMB stylesheet
-            // 'closed'     => true, // true to keep the metabox closed by default
-            // 'classes'    => 'extra-class', // Extra cmb2-wrap classes
-            // 'classes_cb' => 'yourprefix_add_some_classes', // Add classes through a callback.
         ) );
 
         $front_page_banner_metabox->add_field( array(
@@ -79,6 +75,66 @@ class A_Comer_Plugin_Front_Page_Fields {
                     'image/webp',
                 )
             ),
+        ) );
+
+    }
+
+    function front_page_features_metabox() {
+
+        $prefix = 'front_page_features_';
+        $front_page_id = get_option( 'page_on_front' );
+
+        $front_page_features_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Features metabox', 'a-comer-plugin' ),
+            'object_types'  => array( 'page' ), // Post type
+            'context'    => 'normal',
+            'priority'   => 'high',
+            'show_names' => true, // Show field names on the left
+            'show_in_rest' => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
+            'show_on'      => array(
+                'id'    => array( $front_page_id ),
+            ),
+        ) );
+
+        $front_page_features_metabox->add_field( array(
+            'name' => esc_html__( 'Title', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the title of the section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'title',
+            'type' => 'text',
+        ) );
+
+        $front_page_features_metabox->add_field( array(
+            'name' => esc_html__( 'Content', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the content of the section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'content',
+            'type' => 'textarea_small',
+        ) );
+
+        $group_field_id = $front_page_features_metabox->add_field( array(
+            'id'          => $prefix . 'features',
+            'type'        => 'group',
+            'description' => esc_html__( 'Generates reusable form features', 'a-comer-plugin' ),
+            'options'     => array(
+                'group_title'    => esc_html__( 'Feature {#}', 'a-comer-plugin' ), // {#} gets replaced by row number
+                'add_button'     => esc_html__( 'Add Another Feature', 'a-comer-plugin' ),
+                'remove_button'  => esc_html__( 'Remove Feature', 'a-comer-plugin' ),
+                'sortable'       => true,
+                // 'closed'      => true, // true to have the groups closed by default
+                'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'a-comer-plugin' ), // Performs confirmation before removing group.
+            ),
+        ) );
+
+        $front_page_features_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Feature Title', 'cmb2' ),
+            'id'         => 'title',
+            'type'       => 'text',
+        ) );
+
+        $front_page_features_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Feature Title', 'cmb2' ),
+            'id'         => 'content',
+            'type'       => 'textarea_small',
         ) );
 
     }

@@ -188,6 +188,7 @@ class A_Comer_Plugin {
 		$plugin_front_page_metaboxes = new A_Comer_Plugin_Front_Page_Fields();
 
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_banner_metabox' );
+		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_features_metabox' );
 
 	}
 
