@@ -18,7 +18,7 @@ class A_Comer_Plugin_Front_Page_Fields {
 
         $front_page_banner_metabox = new_cmb2_box( array(
             'id'            => $prefix . 'metabox',
-            'title'         => esc_html__( 'Banner metabox', 'a-comer-plugin' ),
+            'title'         => esc_html__( 'Banner section', 'a-comer-plugin' ),
             'object_types'  => array( 'page' ), // Post type
             'context'    => 'normal',
             'priority'   => 'high',
@@ -86,7 +86,7 @@ class A_Comer_Plugin_Front_Page_Fields {
 
         $front_page_features_metabox = new_cmb2_box( array(
             'id'            => $prefix . 'metabox',
-            'title'         => esc_html__( 'Features metabox', 'a-comer-plugin' ),
+            'title'         => esc_html__( 'Features section', 'a-comer-plugin' ),
             'object_types'  => array( 'page' ), // Post type
             'context'    => 'normal',
             'priority'   => 'high',
@@ -126,13 +126,13 @@ class A_Comer_Plugin_Front_Page_Fields {
         ) );
 
         $front_page_features_metabox->add_group_field( $group_field_id, array(
-            'name'       => esc_html__( 'Feature Title', 'cmb2' ),
+            'name'       => esc_html__( 'Feature Title', 'a-comer-plugin' ),
             'id'         => 'title',
             'type'       => 'text',
         ) );
 
         $front_page_features_metabox->add_group_field( $group_field_id, array(
-            'name'       => esc_html__( 'Feature Title', 'cmb2' ),
+            'name'       => esc_html__( 'Feature Title', 'a-comer-plugin' ),
             'id'         => 'content',
             'type'       => 'textarea_small',
         ) );
@@ -146,7 +146,7 @@ class A_Comer_Plugin_Front_Page_Fields {
 
         $front_page_counter_metabox = new_cmb2_box( array(
             'id'            => $prefix . 'metabox',
-            'title'         => esc_html__( 'Counters metabox', 'a-comer-plugin' ),
+            'title'         => esc_html__( 'Counters section', 'a-comer-plugin' ),
             'object_types'  => array( 'page' ), // Post type
             'context'    => 'normal',
             'priority'   => 'high',
@@ -172,13 +172,13 @@ class A_Comer_Plugin_Front_Page_Fields {
         ) );
 
         $front_page_counter_metabox->add_group_field( $group_field_id, array(
-            'name'       => esc_html__( 'Counter Title', 'cmb2' ),
+            'name'       => esc_html__( 'Counter Title', 'a-comer-plugin' ),
             'id'         => 'title',
             'type'       => 'text',
         ) );
 
         $front_page_counter_metabox->add_group_field( $group_field_id, array(
-            'name'       => esc_html__( 'Number', 'cmb2' ),
+            'name'       => esc_html__( 'Number', 'a-comer-plugin' ),
             'id'         => 'number',
             'type'       => 'text',
             'attributes' => array(
@@ -188,6 +188,162 @@ class A_Comer_Plugin_Front_Page_Fields {
             ),
             'sanitization_cb' => 'absint',
             'escape_cb'       => 'absint',
+        ) );
+
+    }
+
+    function front_page_first_info_metabox() {
+
+        $prefix = 'front_page_first_info_';
+        $front_page_id = get_option( 'page_on_front' );
+
+        $front_page_first_info_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Stand information 1 section', 'a-comer-plugin' ),
+            'object_types'  => array( 'page' ),
+            'context'       => 'normal',
+            'priority'      => 'high',
+            'show_names'    => true,
+            'show_in_rest'  => WP_REST_Server::ALLMETHODS,
+            'show_on'       => array(
+                'id'    => array( $front_page_id ),
+            ),
+        ) );
+
+        $front_page_first_info_metabox->add_field( array(
+            'name' => esc_html__( 'Title', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the title for the first section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'title',
+            'type' => 'text'
+        ) );
+
+        $front_page_first_info_metabox->add_field( array(
+            'name' => esc_html__( 'Content', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the content for the first section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'content',
+            'type' => 'textarea_small'
+        ) );
+
+        $front_page_first_info_metabox->add_field( array(
+            'name' => esc_html__( 'First section picture', 'a-comer-plugin' ),
+            'id'   => $prefix . 'picture',
+            'desc' => esc_html__( 'Add an image with 462 x 575 pixels', 'a-comer-plugin' ),
+            'type' => 'file',
+            'text' => array(
+                'add_upload_file_text' => esc_html__( 'Upload the section picture', 'a-comer-plugin' )
+            ),
+            'query_args' => array(
+                'type' => array(
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'image/webp',
+                )
+            ),
+        ) );
+
+        $group_field_id =  $front_page_first_info_metabox->add_field( array(
+            'id'          => $prefix . 'stand_out_information',
+            'type'        => 'group',
+            'description' => esc_html__( 'Generates reusable form for stand out information', 'a-comer-plugin' ),
+            'options'     => array(
+                'group_title'    => esc_html__( 'Information {#}', 'a-comer-plugin' ), // {#} gets replaced by row number
+                'add_button'     => esc_html__( 'Add Another information', 'a-comer-plugin' ),
+                'remove_button'  => esc_html__( 'Remove information', 'a-comer-plugin' ),
+                'sortable'       => true,
+                // 'closed'      => true, // true to have the groups closed by default
+                'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'a-comer-plugin' ), // Performs confirmation before removing group.
+            ),
+        ) );
+
+        $front_page_first_info_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Information Title', 'a-comer-plugin' ),
+            'id'         => 'title',
+            'type'       => 'text',
+        ) );
+
+        $front_page_first_info_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Information Content', 'a-comer-plugin' ),
+            'id'         => 'content',
+            'type'       => 'textarea_small',
+        ) );
+
+    }
+
+    function front_page_second_info_metabox() {
+
+        $prefix = 'front_page_second_info_';
+        $front_page_id = get_option( 'page_on_front' );
+
+        $front_page_second_info_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Stand information 2 section', 'a-comer-plugin' ),
+            'object_types'  => array( 'page' ),
+            'context'       => 'normal',
+            'priority'      => 'high',
+            'show_names'    => true,
+            'show_in_rest'  => WP_REST_Server::ALLMETHODS,
+            'show_on'       => array(
+                'id'    => array( $front_page_id ),
+            ),
+        ) );
+
+        $front_page_second_info_metabox->add_field( array(
+            'name' => esc_html__( 'Title', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the title for the second section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'title',
+            'type' => 'text'
+        ) );
+
+        $front_page_second_info_metabox->add_field( array(
+            'name' => esc_html__( 'Content', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the content for the second section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'content',
+            'type' => 'textarea_small'
+        ) );
+
+        $front_page_second_info_metabox->add_field( array(
+            'name' => esc_html__( 'second section picture', 'a-comer-plugin' ),
+            'id'   => $prefix . 'picture',
+            'desc' => esc_html__( 'Add an image with 462 x 575 pixels', 'a-comer-plugin' ),
+            'type' => 'file',
+            'text' => array(
+                'add_upload_file_text' => esc_html__( 'Upload the section picture', 'a-comer-plugin' )
+            ),
+            'query_args' => array(
+                'type' => array(
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'image/webp',
+                )
+            ),
+        ) );
+
+        $group_field_id =  $front_page_second_info_metabox->add_field( array(
+            'id'          => $prefix . 'stand_out_information',
+            'type'        => 'group',
+            'description' => esc_html__( 'Generates reusable form for stand out information', 'a-comer-plugin' ),
+            'options'     => array(
+                'group_title'    => esc_html__( 'Information {#}', 'a-comer-plugin' ), // {#} gets replaced by row number
+                'add_button'     => esc_html__( 'Add Another information', 'a-comer-plugin' ),
+                'remove_button'  => esc_html__( 'Remove information', 'a-comer-plugin' ),
+                'sortable'       => true,
+                // 'closed'      => true, // true to have the groups closed by default
+                'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'a-comer-plugin' ), // Performs confirmation before removing group.
+            ),
+        ) );
+
+        $front_page_second_info_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Information Title', 'a-comer-plugin' ),
+            'id'         => 'title',
+            'type'       => 'text',
+        ) );
+
+        $front_page_second_info_metabox->add_group_field( $group_field_id, array(
+            'name'       => esc_html__( 'Information Content', 'a-comer-plugin' ),
+            'id'         => 'content',
+            'type'       => 'textarea_small',
         ) );
 
     }
