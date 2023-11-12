@@ -117,6 +117,7 @@ class A_Comer_Plugin {
 		 * The file responsible of give functionality with cmb2 framework
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-field-faiconselect/iconselect.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.

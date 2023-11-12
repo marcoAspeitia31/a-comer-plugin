@@ -137,6 +137,14 @@ class A_Comer_Plugin_Front_Page_Fields {
             'type'       => 'textarea_small',
         ) );
 
+        $front_page_features_metabox->add_group_field( $group_field_id, array(
+			'name' => esc_html__( 'Icon', 'a-comer-plugin' ),
+			'id'   => 'icon',
+			'desc' => 'Select Font Awesome icon',
+			'type' => 'faiconselect',
+			'options_cb' => 'returnRayFaPre'
+		) );
+
     }
 
     function front_page_counter_metabox() {
@@ -268,6 +276,14 @@ class A_Comer_Plugin_Front_Page_Fields {
             'type'       => 'textarea_small',
         ) );
 
+        $front_page_first_info_metabox->add_group_field( $group_field_id, array(
+			'name' => esc_html__( 'Icon', 'a-comer-plugin' ),
+			'id'   => 'icon',
+			'desc' => 'Select Font Awesome icon',
+			'type' => 'faiconselect',
+			'options_cb' => 'returnRayFaPre'
+		) );
+
     }
 
     function front_page_second_info_metabox() {
@@ -345,6 +361,15 @@ class A_Comer_Plugin_Front_Page_Fields {
             'id'         => 'content',
             'type'       => 'textarea_small',
         ) );
+
+        $front_page_second_info_metabox->add_group_field( $group_field_id, array(
+			'name' => esc_html__( 'Icon', 'a-comer-plugin' ),
+			'id'   => 'icon',
+			'desc' => 'Select Font Awesome icon',
+			'type' => 'faiconselect',
+			'options_cb' => 'returnRayFaPre'
+		) );
+
 
     }
 
