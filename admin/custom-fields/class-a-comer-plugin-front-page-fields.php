@@ -440,4 +440,107 @@ class A_Comer_Plugin_Front_Page_Fields {
         ) );
     }
 
+    function front_page_video_metabox() {
+
+        $prefix = 'front_page_video_';
+        $front_page_id = get_option( 'page_on_front' );
+
+        $front_page_video_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Video section', 'a-comer-plugin' ),
+            'object_types'  => array( 'page' ),
+            'context'       => 'normal',
+            'priority'      => 'high',
+            'show_names'    => true,
+            'show_in_rest'  => WP_REST_Server::ALLMETHODS,
+            'show_on'       => array(
+                'id'    => array( $front_page_id ),
+            ),
+        ) );
+
+        $front_page_video_metabox->add_field( array(
+            'name' => esc_html__( 'Title', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the title for promo video', 'a-comer-plugin' ),
+            'id'   => $prefix . 'title',
+            'type' => 'text'
+        ) );
+
+        $front_page_video_metabox->add_field( array(
+            'name' => esc_html__( 'Promotional embed video', 'a-comer-plugin' ),
+            'desc' => sprintf(
+                /* translators: %s: link to codex.wordpress.org/Embeds */
+                esc_html__( 'Enter a youtube, twitter, or instagram URL. Supports services listed at %s.', 'a-comer-plugin' ),
+                '<a href="https://wordpress.org/support/article/embeds/">codex.wordpress.org/Embeds</a>'
+            ),
+            'id'   => $prefix . 'video',
+            'type' => 'oembed',
+        ) );
+
+        $front_page_video_metabox->add_field( array(
+            'name' => esc_html__( 'Background video', 'a-comer-plugin' ),
+            'id'   => $prefix . 'bg',
+            'desc'       => esc_html__( 'Add an image with 1380 x 920 pixels', 'a-comer-plugin' ),
+            'type' => 'file',
+            'text' => array(
+                'add_upload_file_text' => esc_html__( 'Upload the background image', 'a-comer-plugin' )
+            ),
+            'query_args' => array(
+                'type' => array(
+                    'image/jpg',
+                    'image/jpeg',
+                    'image/png',
+                    'image/webp',
+                )
+            ),
+        ) );
+
+    }
+
+    function front_page_testimonials_metabox() {
+
+        $prefix = 'front_page_testimonials_';
+        $front_page_id = get_option( 'page_on_front' );
+
+        $front_page_testimonials_metabox = new_cmb2_box( array(
+            'id'            => $prefix . 'metabox',
+            'title'         => esc_html__( 'Testimonials section', 'a-comer-plugin' ),
+            'object_types'  => array( 'page' ),
+            'context'       => 'normal',
+            'priority'      => 'high',
+            'show_names'    => true,
+            'show_in_rest'  => WP_REST_Server::ALLMETHODS,
+            'show_on'       => array(
+                'id'    => array( $front_page_id ),
+            ),
+        ) );
+
+        $front_page_testimonials_metabox->add_field( array(
+            'name' => esc_html__( 'Title', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the title for this section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'title',
+            'type' => 'text'
+        ) );
+
+        $front_page_testimonials_metabox->add_field( array(
+            'name' => esc_html__( 'Content', 'a-comer-plugin' ),
+            'desc' => esc_html__( 'Write the content for this section', 'a-comer-plugin' ),
+            'id'   => $prefix . 'content',
+            'type' => 'textarea_small'
+        ) );
+
+        $front_page_testimonials_metabox->add_field( array(
+            'name'       => esc_html__( 'Number of testimonials to show', 'a-comer-plugin' ),
+            'id'         => $prefix . 'number',
+            'type'       => 'text',
+            'attributes' => array(
+                'type'      => 'number',
+                'pattern'   => '\d*',
+                'min' => '1',
+            ),
+            'sanitization_cb' => 'absint',
+            'escape_cb'       => 'absint',
+        ) );
+
+    }
+
 }

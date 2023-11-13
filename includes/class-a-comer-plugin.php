@@ -194,6 +194,8 @@ class A_Comer_Plugin {
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_first_info_metabox' );
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_second_info_metabox' );
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_cta_metabox' );
+		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_video_metabox' );
+		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_testimonials_metabox' );
 
 	}
 
