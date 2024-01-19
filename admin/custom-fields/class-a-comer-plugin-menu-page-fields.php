@@ -123,9 +123,6 @@ class A_Comer_Plugin_Menu_Page_Fields {
             'name' => esc_html__( 'Business phone', 'a-comer-plugin' ),
             'id'   => 'business_phone',
             'type' => 'text',
-            'attributes' => array(
-                'type' => 'number',
-            ),
         ) );
 
         // E-mail
@@ -149,10 +146,6 @@ class A_Comer_Plugin_Menu_Page_Fields {
             'name' => esc_html__( 'Business address', 'a-comer-plugin' ),
             'id'   => 'business_address',
             'type' => 'textarea_small',
-            'attributes' => array(
-                'disabled' => 'disabled',
-                'readonly' => 'readonly',
-            ),
         ) );
 
         /**
