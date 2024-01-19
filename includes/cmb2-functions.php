@@ -21,7 +21,7 @@ if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
 	require_once dirname( __FILE__ ) . '/CMB2/init.php';
 }
 
-return;
+//return;
 
 /**
  * Conditionally displays a metabox when used as a callback in the 'show_on_cb' cmb2_box parameter
@@ -170,6 +170,14 @@ function yourprefix_register_demo_metabox() {
 		// 	'position' => 2, // Set as the second column.
 		// );
 		// 'display_cb' => 'yourprefix_display_text_small_column', // Output the display of the column values through a callback.
+	) );
+
+	$cmb_demo->add_field( array(
+		'name' => 'Location',
+		'desc' => 'Drag the marker to set the exact location',
+		'id' => 'yourprefix_demo_location',
+		'type' => 'pw_map',
+		// 'split_values' => true, // Save latitude and longitude as two separate fields
 	) );
 
 	$cmb_demo->add_field( array(

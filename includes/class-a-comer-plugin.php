@@ -118,6 +118,7 @@ class A_Comer_Plugin {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-field-faiconselect/iconselect.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb_field_map/cmb-field-map.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -128,6 +129,7 @@ class A_Comer_Plugin {
 		 * The classes responsibles for defining all the metaboxes for pages in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/admin/custom-fields/class-a-comer-plugin-front-page-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/admin/custom-fields/class-a-comer-plugin-menu-page-fields.php';
 
 		/**
 		 * The class responsible for defining all actions that occur with custom post types
@@ -196,6 +198,11 @@ class A_Comer_Plugin {
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_cta_metabox' );
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_video_metabox' );
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_testimonials_metabox' );
+
+		$plugin_menu_page_metaboxes = new A_Comer_Plugin_Menu_Page_Fields();
+
+		$this->loader->add_action( 'cmb2_admin_init', $plugin_menu_page_metaboxes, 'menu_page_metabox' );
+		$this->loader->add_action( 'updated_option', $plugin_menu_page_metaboxes, 'geocode_business_address', 10, 3 );
 
 	}
 
