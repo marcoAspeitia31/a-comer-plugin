@@ -76,7 +76,8 @@ class A_Comer_Plugin_Menu_Page_Fields {
                     'image/png',
                     'image/webp',
                 )
-            )
+            ),
+            'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
         ) );
 
         // CTA url
