@@ -202,7 +202,7 @@ class A_Comer_Plugin {
 		$plugin_menu_page_metaboxes = new A_Comer_Plugin_Menu_Page_Fields();
 
 		$this->loader->add_action( 'cmb2_admin_init', $plugin_menu_page_metaboxes, 'menu_page_metabox' );
-		//$this->loader->add_action( 'updated_option', $plugin_menu_page_metaboxes, 'geocode_business_address', 10, 3 );
+		$this->loader->add_action( 'updated_option', $plugin_menu_page_metaboxes, 'geocode_business_address', 10, 3 );
 
 	}
 

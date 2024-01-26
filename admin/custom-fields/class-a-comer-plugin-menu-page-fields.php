@@ -132,6 +132,13 @@ class A_Comer_Plugin_Menu_Page_Fields {
             'type' => 'text_email',
         ) );
 
+        // E-mail
+        $acp_options->add_field( array(
+            'name' => esc_html__( 'Contact form shortcode', 'a-comer-plugin' ),
+            'id'   => 'contact_form',
+            'type' => 'text',
+        ) );
+
         // Map
         $acp_options->add_field( array(
             'name' => 'Location',
