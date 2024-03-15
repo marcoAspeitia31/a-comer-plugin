@@ -129,6 +129,7 @@ class A_Comer_Plugin {
 		 * The classes responsibles for defining all the metaboxes for pages in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/admin/custom-fields/class-a-comer-plugin-front-page-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/admin/custom-fields/class-a-comer-plugin-contact-page-fields.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . '/admin/custom-fields/class-a-comer-plugin-menu-page-fields.php';
 
 		/**
@@ -198,6 +199,10 @@ class A_Comer_Plugin {
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_cta_metabox' );
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_video_metabox' );
 		$this->loader->add_action( 'cmb2_init', $plugin_front_page_metaboxes, 'front_page_testimonials_metabox' );
+
+		$plugin_contact_page_metaboxes = new A_Comer_Plugin_Contact_Page_Fields();
+		$this->loader->add_action( 'cmb2_init', $plugin_contact_page_metaboxes, 'contact_page_cta_metabox' );
+		$this->loader->add_action( 'cmb2_init', $plugin_contact_page_metaboxes, 'contact_page_cta_metabox_drivers' );
 
 		$plugin_menu_page_metaboxes = new A_Comer_Plugin_Menu_Page_Fields();
 
